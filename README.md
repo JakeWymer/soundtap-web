@@ -16,9 +16,9 @@ Clone this repo and `cd soundtap-web`
 
 With your virtual env activated:
 
-Install python packages: `pip install -r requirements.txt`
-Install git pre-commit hooks: `pre-commit install`
-Install typescript packages: `npm i`
+- Install python packages: `pip install -r requirements.txt`
+- Install git pre-commit hooks: `pre-commit install`
+- Install typescript packages: `npm i`
 
-Start the flask dev server: `python ./server/index.py`
-Start the react dev server: `npm start` 
+- Start the flask dev server: `python ./server/index.py`
+- Start the react dev server: `npm start` 
