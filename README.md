@@ -20,5 +20,5 @@ With your virtual env activated:
 - Install git pre-commit hooks: `pre-commit install`
 - Install typescript packages: `npm i`
 
-- Start the flask dev server: `python ./server/index.py`
+- Start the flask dev server: `python ./server/app.py`
 - Start the react dev server: `npm start` 
