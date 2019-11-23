@@ -1,5 +1,6 @@
 import React, {useState} from 'react';
 import axios from 'axios';
+import Api from '../../common/api';
 import Modal, {ModalProps} from '../Modal/Modal';
 import LoginOrRegisterForm from '../LoginOrRegisterForm/LoginOrRegistrerForm';
 import './Header.css';
@@ -12,12 +13,11 @@ enum ModalOptions {
 const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalOption, setModalOption] = useState('');
-
+  const api = new Api();
   const register = async (e: React.FormEvent, email: String, password: String) => {
     e.preventDefault();
     try {
-      const {data: token} = await axios.post(`/auth/register`, {'email': email, 'password': password});
-      localStorage.setItem('soundtap-jwt', token);
+      await api.post(`/auth/register`, {'email': email, 'password': password});
     } catch(err) {
       console.log(err);
     } finally {
@@ -27,8 +27,7 @@ const Header = () => {
   const login = async (e: React.FormEvent, email: String, password: String) => {
     e.preventDefault();
     try {
-      const {data: token} = await axios.post(`/auth/login`, {'email': email, 'password': password});
-      localStorage.setItem('soundtap-jwt', token);
+      await api.post(`/auth/login`, {'email': email, 'password': password});
     } catch(err) {
       console.log(err);
     } finally {
