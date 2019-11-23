@@ -10,3 +10,10 @@ class LoginOrRegisterSchema(Schema):
         required=True,
         error_messages={"required": {"message": "Password is required", "code": 400}},
     )
+
+
+class BoardSchema(Schema):
+    title = fields.String(
+        required=True,
+        error_message={"required": {"message": "Title is required", "code": 400}},
+    )

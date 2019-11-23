@@ -17,14 +17,18 @@ class Api implements ApiInterface {
 
   private async sendRequest(options: AxiosRequestConfig) {
     try {
-      const res: AxiosResponse = await axios.request(options); 
+      const res: AxiosResponse = await axios.request(options);
       const {jwt} = res.data;
       if (jwt) {
         storeToken(jwt);
       }
+      if (res.data.data) {
+        res.data = res.data.data;
+      }
       return res.data;
     } catch(err) {
       console.log(err);
+      throw err;
     } 
   }
 

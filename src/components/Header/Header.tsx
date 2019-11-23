@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import axios from 'axios';
+import {redirect} from '../../common/util';
 import Api from '../../common/api';
 import Modal, {ModalProps} from '../Modal/Modal';
 import LoginOrRegisterForm from '../LoginOrRegisterForm/LoginOrRegistrerForm';
@@ -14,10 +14,12 @@ const Header = () => {
   const [showModal, setShowModal] = useState(false);
   const [modalOption, setModalOption] = useState('');
   const api = new Api();
+
   const register = async (e: React.FormEvent, email: String, password: String) => {
     e.preventDefault();
     try {
       await api.post(`/auth/register`, {'email': email, 'password': password});
+      redirect('/dashboard');
     } catch(err) {
       console.log(err);
     } finally {
@@ -28,6 +30,7 @@ const Header = () => {
     e.preventDefault();
     try {
       await api.post(`/auth/login`, {'email': email, 'password': password});
+      redirect('/dashboard');
     } catch(err) {
       console.log(err);
     } finally {

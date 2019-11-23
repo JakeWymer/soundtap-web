@@ -1,10 +1,7 @@
 import React, {useState} from 'react';
+import {ModalFormProps} from '../../common/types';
 
-export interface LoginOrRegisterFormProps {
-  submit: Function;
-}
-
-const LoginOrRegisterForm = (props: LoginOrRegisterFormProps) => {
+const LoginOrRegisterForm = (props: ModalFormProps) => {
   const [email, setEmail] = useState(``);
   const [password, setPassword] = useState(``);
 
