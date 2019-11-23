@@ -40,10 +40,8 @@ def validate_token(f):
             user = User.query.get(user_id)
             kwargs["user"] = user
             result = f(*args, **kwargs)
-            if result:
-                response = {"data": result, "jwt": user.generate_token()}
-                return response
-            return abort(500)
+            response = {"data": result, "jwt": user.generate_token()}
+            return response
         except jwt.ExpiredSignatureError:
             return abort(401)
 

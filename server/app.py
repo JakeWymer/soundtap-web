@@ -14,8 +14,12 @@ app.config["SQLALCHEMY_DATABASE_URI"] = os.getenv("POSTGRES_CONNECTION_STRING")
 api = Api(app)
 db.init_app(app)
 
+# Auth
 api.add_resource(resources.Register, "/auth/register")
 api.add_resource(resources.Login, "/auth/login")
+
+# Boards
+api.add_resource(resources.Boards, "/api/boards")
 
 if __name__ == "__main__":
     print("Building database schema")

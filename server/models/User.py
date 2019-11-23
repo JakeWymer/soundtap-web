@@ -4,10 +4,24 @@ import os
 from common.db import db
 
 
+boards = db.Table(
+    "boards_users",
+    db.Column("board_id", db.Integer, db.ForeignKey("boards.id"), primary_key=True),
+    db.Column("user_id", db.Integer, db.ForeignKey("users.id"), primary_key=True),
+)
+
+
 class User(db.Model):
+    __tablename__ = "users"
     id = db.Column(db.Integer, primary_key=True)
     email = db.Column(db.String(80), unique=True, nullable=False)
     hashed_pass = db.Column(db.String(120), nullable=False)
+    boards = db.relationship(
+        "Board",
+        secondary=boards,
+        lazy="subquery",
+        backref=db.backref("users", lazy=True),
+    )
 
     def __init__(self, email, hashed_pass):
         self.email = email
@@ -40,3 +54,7 @@ class User(db.Model):
             return "Signature expired. Please log in again."
         except jwt.InvalidTokenError:
             return "Invalid token. Please log in again."
+
+    def get_boards(self):
+        boards = [b.serialize() for b in self.boards]
+        return boards
