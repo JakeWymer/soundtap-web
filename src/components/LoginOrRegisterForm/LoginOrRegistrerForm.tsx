@@ -1,10 +1,17 @@
 import React, {useState} from 'react';
 import {ModalFormProps} from '../../common/types';
+import Button, { ButtonProps } from '../Button/Button';
 
 const LoginOrRegisterForm = (props: ModalFormProps) => {
   const [email, setEmail] = useState(``);
   const [password, setPassword] = useState(``);
-
+  const handleClick = (e: React.FormEvent) => {
+    props.submit(e, email, password);
+  }
+  const buttonProps: ButtonProps = {
+    text: 'Submit',
+    handleClick
+  }
   return (
     <form onSubmit={(e: React.FormEvent) => props.submit(e, email, password)}>
       <label htmlFor="email">Email</label>
@@ -17,7 +24,7 @@ const LoginOrRegisterForm = (props: ModalFormProps) => {
         value={password}
         name="password"
         onChange={e => setPassword(e.target.value)}/>
-      <button>Submit</button>
+      <Button {...buttonProps}/>
     </form>
   );
 }

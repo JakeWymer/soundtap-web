@@ -1,0 +1,49 @@
+.ReactModal__Overlay {
+  opacity: 0;
+  transition: opacity 250ms ease-in-out;
+}
+
+.ReactModal__Overlay--after-open{
+  opacity: 1;
+}
+
+.ReactModal__Overlay--before-close{
+  opacity: 0;
+}
+
+.Modal {
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  position: absolute;
+  padding: 20px;
+  background-color: var(--white);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  min-width: 350px;
+}
+
+.Modal:focus, input:focus {
+  outline:0;
+}
+
+.Modal input[type='text'], .Modal input[type='password'] {
+  margin: 10px 0px;
+  border: none;
+  border-bottom: 1px solid var(--grey);
+  padding: 5px;
+  border-radius: 2px;
+}
+
+.Modal form {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.modal-title {
+  text-transform: capitalize;
+  margin-bottom: 20px;
+  text-align: center;
+}

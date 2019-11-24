@@ -16,6 +16,6 @@
   width: 20vw;
 }
 
-.header-nav > .header-nav-link {
+.header-nav > .header-nav-link, .header-title {
   cursor: pointer;
 }
