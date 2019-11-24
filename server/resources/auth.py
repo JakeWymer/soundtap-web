@@ -36,7 +36,7 @@ class Login(Resource):
             if not user:
                 return abort(400, "Incorrect email")
             if check_password_hash(user.hashed_pass, password):
-                return user.id
+                return {"jwt": user.generate_token()}
         except Exception as err:
             print(err)
             raise err

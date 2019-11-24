@@ -1,7 +1,10 @@
 import React, {useState, useEffect} from 'react';
 import Modal, { ModalProps } from '../../components/Modal/Modal';
+import {FiPlus} from "react-icons/fi";
 import Api from '../../common/api';
 import CreateBoardForm from '../../components/CreateBoardForm/CreateBoardForm';
+import Button, {ButtonProps, ButtonThemes} from '../../components/Button/Button';
+import './Dashboard.css';
 
 type Board = {
   id: number;
@@ -33,23 +36,38 @@ const Dashboard = () => {
       console.log(err);
     }
   }
+  const openModal = () => {
+    setShowModal(true);
+  }
   const modalProps: ModalProps = {
     showModal,
     closeModal: () => setShowModal(false),
-    children: <CreateBoardForm submit={createBoard}/>
+    children: <CreateBoardForm submit={createBoard}/>,
+    title: 'Create Board',
   };
   const boardArr = boards.map(board => {
     return (
-      <div key={board.id}>
-        <h3>{board.title}</h3>
+      <div className="dashboard-board" key={board.id}>
+        <div className="dashboard-board-img"></div>
+        <h3 className="dashboard-board-title">{board.title}</h3>
       </div>
     );
   });
+  const addBoardButton: ButtonProps = {
+    handleClick: openModal,
+    text: 'New Board',
+    icon: <FiPlus />,
+  }
   return (
-    <div>
-      <h2>Dashboard</h2>
-      <button onClick={() => setShowModal(true)}>Add board</button>
-      {boardArr}
+    <div className="dashboard-wrap">
+      <div className="dashboard-header">
+        <h2 className="dashboard-title">My Boards</h2>
+        <Button {...addBoardButton} />
+      </div>
+      <hr/>
+      <div className="dashboard-boards">
+        {boardArr}
+      </div>
       <Modal {...modalProps}/>
     </div>
   );
